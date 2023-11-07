@@ -1,6 +1,6 @@
 //COMPONENTS
 import MovieListBox from "./MovieListBox/MovieListBox";
-import WatchedBox from "./WatchedBox";
+import MovieWatchedBox from "./MovieWatchedBox/MovieWatchedBox";
 
 type Props = {
   movies: {
@@ -15,7 +15,7 @@ export default function Main({ movies }: Props) {
   return (
     <main className="main">
       <MovieListBox movies={movies} />
-      <WatchedBox />
+      <MovieWatchedBox />
     </main>
   );
 }

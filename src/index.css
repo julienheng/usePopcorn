@@ -55,8 +55,8 @@ body {
 }
 
 .box {
-  width: 42rem;
-  max-width: 42rem;
+  width: 45rem;
+  max-width: 45rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
   overflow: scroll;
@@ -217,10 +217,11 @@ body {
 /* ******* */
 
 .summary {
-  padding: 2.2rem 3.2rem 1.8rem 3.2rem;
+  padding: 2.2rem 2rem 1.8rem 2rem;
   border-radius: 0.9rem;
   background-color: var(--color-background-100);
   box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.2);
+  
 }
 
 .summary h2 {
@@ -231,6 +232,7 @@ body {
 
 .summary div {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 2.4rem;
   font-size: 1.6rem;
@@ -242,6 +244,9 @@ body {
   align-items: center;
   gap: 0.8rem;
 }
+/* .sumary p span {
+  display: flex
+} */
 
 /* ******* */
 
