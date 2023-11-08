@@ -10,7 +10,6 @@ import Search from "./components/NavBar/Search";
 import Logo from "./components/NavBar/Logo";
 import NumResults from "./components/NavBar/NumResults";
 import Box from "./components/Box";
-// import MovieWatchedBox from "./components/MovieWatchedBox/MovieWatchedBox";
 import MovieList from "./components/MovieListBox/MovieList";
 import WatchedSummary from "./components/MovieWatchedBox/WatchedSummary";
 import WatchedList from "./components/MovieWatchedBox/WatchedList";
