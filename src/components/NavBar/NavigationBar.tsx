@@ -1,18 +1,7 @@
-// COMPONENTS
-import Search from "./Search";
-import Logo from "./Logo";
-import NumResults from "./NumResults";
-
 type Props = {
-  movies: object[];
+  children: React.ReactNode;
 };
 
-export default function NavigationBar({ movies }: Props) {
-  return (
-    <nav className="nav-bar">
-      <Logo />
-      <Search />
-      <NumResults movies={movies} /> 
-    </nav>
-  );
+export default function NavigationBar({ children }: Props) {
+  return <nav className="nav-bar">{children}</nav>;
 }

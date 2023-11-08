@@ -9,7 +9,7 @@ type Props = {
 export default function MovieSummary({ watched }: Props) {
   const average = (arr: number[]) =>
     arr.reduce(
-      (acc: number, cur: number, i: number, arr: number[]) =>
+      (acc: number, cur: number, _i: number, arr: number[]) =>
         acc + cur / arr.length,
       0
     );
