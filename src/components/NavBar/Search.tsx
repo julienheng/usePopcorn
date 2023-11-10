@@ -1,9 +1,9 @@
-import { useState } from "react";
+type Props = {
+  query: string;
+  setQuery: (query: string) => void;
+};
 
-export default function Search() {
-
-  const [query, setQuery] = useState("");
-
+export default function Search({ query, setQuery }: Props) {
   return (
     <input
       className="search"
