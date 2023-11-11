@@ -8,15 +8,16 @@ type Props = {
     runtime: number;
     Title: string;
     imdbID: string;
-    Poster: string;
+    poster: string;
   }[];
+  onDeleteWatched: (id: string) => void;
 };
 
-export default function WatchedList({ watched }: Props) {
+export default function WatchedList({ watched, onDeleteWatched }: Props) {
   return (
     <ul className="list">
       {watched.map((movie) => (
-        <WatchedMovie movie={movie} />
+        <WatchedMovie movie={movie} onDeleteWatched={onDeleteWatched} />
       ))}
     </ul>
   );

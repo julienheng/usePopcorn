@@ -5,13 +5,14 @@ type Props = {
     runtime: number;
     Title: string;
     imdbID: string;
-    Poster: string;
+    poster: string;
   };
+  onDeleteWatched: (id: string) => void;
 };
-export default function WatchedMovie({ movie }: Props) {
+export default function WatchedMovie({ movie, onDeleteWatched }: Props) {
   return (
     <li key={movie.imdbID}>
-      <img src={movie.Poster} alt={`${movie.Title} poster`} />
+      <img src={movie.poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>
         <p>
@@ -26,6 +27,12 @@ export default function WatchedMovie({ movie }: Props) {
           <span>⏳</span>
           <span>{movie.runtime} min</span>
         </p>
+        <button
+          className="btn-delete"
+          onClick={() => onDeleteWatched(movie.imdbID)}
+        >
+          X
+        </button>
       </div>
     </li>
   );

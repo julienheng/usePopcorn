@@ -5,8 +5,9 @@ import Star from "./Star";
 
 type Props = {
   maxRating: number;
-  color: string;
   size: number;
+  onSetRating: (rating: number) => void;
+  color: string;
   messages: string[];
   defaultRating: number;
 };
@@ -17,15 +18,21 @@ export default function StarRating({
   size = 48,
   messages = [],
   defaultRating = 0,
+  onSetRating,
 }: Props) {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
+
+  function handleRating(rating: number) {
+    setRating(rating);
+    onSetRating(rating);
+  }
 
   const textStyle = {
     lineHeight: "1",
     margin: "0",
     color,
-    fontSize: `${size / 1.5}px}`,
+    fontSize: `${size / 1.5}px`,
   };
 
   return (
@@ -35,6 +42,7 @@ export default function StarRating({
           <Star
             key={i}
             onClick={() => setRating(i + 1)}
+            onRate={() => handleRating(i + 1)}
             full={tempRating ? tempRating >= i + 1 : rating >= i + 1}
             onHoverIn={() => setTempRating(i + 1)}
             onHoverOut={() => setTempRating(0)}

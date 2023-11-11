@@ -5,15 +5,16 @@ type Props = {
   onHoverOut: () => void;
   color: string;
   size: number;
+  onRate: () => void;
 };
 
 export default function Star({
-  onClick,
   full,
   onHoverIn,
   onHoverOut,
   color,
   size,
+  onRate
 }: Props) {
   const starStyle = {
     width: `${size}px`,
@@ -26,7 +27,7 @@ export default function Star({
     <span
       role="button"
       style={starStyle}
-      onClick={onClick}
+      onClick={onRate}
       onMouseEnter={onHoverIn}
       onMouseLeave={onHoverOut}
     >

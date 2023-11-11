@@ -8,13 +8,14 @@ type Props = {
     imdbID: string;
     Poster: string;
   }[];
+  handleSelectMovie: (id: string) => void;
 };
 
-export default function MovieList({ movies }: Props) {
+export default function MovieList({ movies, handleSelectMovie }: Props) {
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <Movie movie={movie} />
+        <Movie movie={movie} handleSelectMovie={handleSelectMovie}  />
       ))}
     </ul>
   );
