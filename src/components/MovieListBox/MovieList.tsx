@@ -15,7 +15,11 @@ export default function MovieList({ movies, handleSelectMovie }: Props) {
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <Movie movie={movie} handleSelectMovie={handleSelectMovie}  />
+        <Movie
+          key={movie.imdbID}
+          movie={movie}
+          handleSelectMovie={handleSelectMovie}
+        />
       ))}
     </ul>
   );

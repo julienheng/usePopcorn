@@ -89,6 +89,7 @@ export default function MovieDetails({
     [selectedId]
   );
 
+  // TITLE ON BROWSER TAB
   useEffect(
     function () {
       if (!title) return;
