@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import { useMovies } from "../utils/useMovies";
+import { useLocalStorageState } from "../utils/useLocalStorage";
 
 //COMPONENTS
 import NavigationBar from "./components/NavBar/NavigationBar";
@@ -16,21 +18,18 @@ import WatchedList from "./components/MovieWatchedBox/WatchedList";
 import MovieDetails from "./components/MovieDetails";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>("");
-  const [watched, setWatched] = useState<any[]>(function () {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue as string) || [];
-  });
+
+  const { movies, error, isLoading } = useMovies(query);
+
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   const handleSelectMovie = (id: string) => {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
   };
 
-  const onCloseMovie = () => {
+  const handleCloseMovie = () => {
     setSelectedId(null);
   };
 
@@ -38,51 +37,11 @@ function App() {
     setWatched((watched: object[]) => [...watched, movie]);
   }
 
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
-
   function handleDeleteWatched(id: string) {
-    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
+    setWatched((watched: object[]) =>
+      watched.filter((movie: any) => (movie.imdbID as string) !== id)
+    );
   }
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setIsLoading(true);
-        setError("");
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=947eaf2b&s=${query}`
-        );
-
-        if (!res.ok)
-          throw new Error("Something went wrong with fetching movies");
-
-        const data = await res.json();
-
-        if (data.Response === "False") throw new Error("Movie not found");
-
-        setMovies(data.Search);
-        console.log(data);
-      } catch (err: unknown) {
-        console.error((err as Error).message);
-        setError((err as Error).message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (query.length < 3) {
-      setMovies([]);
-      setError("");
-      return;
-    }
-
-    fetchMovies();
-  }, [query]);
 
   return (
     <div>
@@ -106,7 +65,7 @@ function App() {
           {selectedId ? (
             <MovieDetails
               selectedId={selectedId}
-              onCloseMovie={onCloseMovie}
+              onCloseMovie={handleCloseMovie}
               onAddWatched={handleAddWatched}
               watched={watched}
             />

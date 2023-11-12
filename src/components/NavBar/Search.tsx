@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
+import { useKey } from "../../../utils/useKey";
 
 type Props = {
   query: string;
@@ -10,22 +11,11 @@ type Props = {
 export default function Search({ query, setQuery }: Props) {
   const inputElement = useRef<any>(null);
 
-  useEffect(
-    function () {
-      function callback(e: KeyboardEvent) {
-        if (document.activeElement !== inputElement.current) return;
-
-        if (e.code === "Enter") {
-          inputElement.current.focus();
-          setQuery("");
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-      return () => document.removeEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
+  useKey("Enter", function () {
+    if (document.activeElement === inputElement.current) return;
+    inputElement.current.focus();
+    setQuery("");
+  });
 
   return (
     <input
